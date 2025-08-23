@@ -2,9 +2,9 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
-	"fmt"
 )
 
 func respondWithError(w http.ResponseWriter, code int, msg string, logErr error) {
