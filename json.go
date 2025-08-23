@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"fmt"
 )
 
 func respondWithError(w http.ResponseWriter, code int, msg string, logErr error) {
@@ -30,5 +31,13 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 		return
 	}
 	w.WriteHeader(code)
-	w.Write(dat)
+	log, err := w.Write(dat)
+
+	if err != nil {
+		fmt.Printf("Error writing JSON: %s", err)
+		w.WriteHeader(500)
+		return
+	}
+
+	fmt.Printf("Writer return code is: %v", log)
 }
