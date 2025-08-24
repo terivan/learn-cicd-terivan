@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 )
@@ -31,13 +30,9 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 		return
 	}
 	w.WriteHeader(code)
-	log, err := w.Write(dat)
-
-	if err != nil {
-		fmt.Printf("Error writing JSON: %s", err)
-		w.WriteHeader(500)
-		return
+	if _, err := w.Write(dat); err != nil {
+		log.Printf("Error writing JSON response: %s", err)
+		// At this point, headers and status have already been sent,
+		// so you can't change the response, but logging helps for debugging.
 	}
-
-	fmt.Printf("Writer return code is: %v", log)
 }
