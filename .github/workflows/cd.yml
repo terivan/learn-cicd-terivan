@@ -20,22 +20,17 @@ jobs:
 
       - name: Build code
         run: ./scripts/buildprod.sh
+        
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-  gcp_setup:
-    name: Build docker
-    runs-on: ubuntu-latest
+      - name: Set up Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v3.0.0'
 
-    steps:
-    - id: auth
-      uses: google-github-actions/auth@v2
-      with:
-        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+      - name: Use gcloud CLI
+        run: gcloud info
 
-    - name: Set up Cloud SDK
-      uses: 'google-github-actions/setup-gcloud@v3.0.0'
-
-    - name: Use gcloud CLI
-      run: gcloud info
-
-    - name: Build Image 
-      run: gcloud builds submit --tag us-central1-docker.pkg.dev/nth-name-470123-d4/notely-ar-repo/notely:latest
+      - name: Build Image 
+        run: gcloud builds submit --tag us-central1-docker.pkg.dev/nth-name-470123-d4/notely-ar-repo/notely:latest .
