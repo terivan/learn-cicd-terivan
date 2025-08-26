@@ -33,7 +33,7 @@ jobs:
         run: gcloud info
       
       - name: Set GCP Project  
-        run: gcloud config set project nth-name-470123-d4
+        run: gcloud config set project notely-ar-repo
 
       - name: Build Image 
-        run: gcloud builds submit --tag us-central1-docker.pkg.dev/nth-name-470123-d4/notely-ar-repo/notely:latest .
+        run: gcloud builds submit --tag us-central1-docker.pkg.dev/notely-ar-repo/notely-ar-repo/notely:latest .
