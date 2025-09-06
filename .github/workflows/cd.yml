@@ -45,8 +45,6 @@ jobs:
       - name: Build Image 
         run: gcloud builds submit --tag us-central1-docker.pkg.dev/notely-470023/notely-ar-repo/notely:latest .
       
-      - name: Turso logic
-        run: ~/.turso/bin/turso auth login
         
       - name: Turso auth
         run: ~/.turso/bin/turso db tokens create notely-db
