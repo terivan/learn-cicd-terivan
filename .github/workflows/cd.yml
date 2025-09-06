@@ -20,7 +20,8 @@ jobs:
           go-version: "1.23.0"
       
       - name: Set up turso
-        run: curl -sSfL https://get.tur.so/install.sh
+        run: curl -sSfL https://get.tur.so/install.sh | bash 
+        
       - name: Set up Goose
         run: go install github.com/pressly/goose/v3/cmd/goose@latest
 
