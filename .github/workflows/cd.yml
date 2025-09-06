@@ -21,7 +21,7 @@ jobs:
       
       - name: Set up turso
         run: curl -sSfL https://get.tur.so/install.sh | bash 
-        
+
       - name: Set up Goose
         run: go install github.com/pressly/goose/v3/cmd/goose@latest
 
@@ -45,8 +45,9 @@ jobs:
       - name: Build Image 
         run: gcloud builds submit --tag us-central1-docker.pkg.dev/notely-470023/notely-ar-repo/notely:latest .
       
+        
       - name: Turso auth
-        run: turso db tokens create notely-db
+        run: ~/.turso/bin/turso db tokens create notely-db
 
       - name: Migrate Tables
         run: ./scripts/migrateup.sh  
